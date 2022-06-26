@@ -1,26 +1,19 @@
-import React from "react";
-import "./App.css";
-import logo from "./logo.svg";
+import classNames from "classnames";
+import css from "./App.module.scss";
+import { TopMenu } from "./components/topMenu/TopMenu";
+import { Content } from "./components/content/Content";
+import { useChainInfo } from "./hooks/useChainInfo";
+import { Navigate } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+export function App() {
+  const { style } = useChainInfo(false) || {};
+
+  return style ? (
+    <div className={classNames(css.container, style)}>
+      <TopMenu />
+      <Content />
     </div>
+  ) : (
+    <Navigate to={"/kusama"} />
   );
 }
-
-export default App;
