@@ -1,14 +1,13 @@
 {
   "files": {
-    "main.css": "/polkadot-crosschain-transactions-viewer/static/css/main.1ef3a49a.css",
-    "main.js": "/polkadot-crosschain-transactions-viewer/static/js/main.c7ce5591.js",
-    "static/media/logo.svg": "/polkadot-crosschain-transactions-viewer/static/media/logo.103b5fa18196d5665a7e12318285c916.svg",
+    "main.css": "/polkadot-crosschain-transactions-viewer/static/css/main.96773e20.css",
+    "main.js": "/polkadot-crosschain-transactions-viewer/static/js/main.31893876.js",
     "index.html": "/polkadot-crosschain-transactions-viewer/index.html",
-    "main.1ef3a49a.css.map": "/polkadot-crosschain-transactions-viewer/static/css/main.1ef3a49a.css.map",
-    "main.c7ce5591.js.map": "/polkadot-crosschain-transactions-viewer/static/js/main.c7ce5591.js.map"
+    "main.96773e20.css.map": "/polkadot-crosschain-transactions-viewer/static/css/main.96773e20.css.map",
+    "main.31893876.js.map": "/polkadot-crosschain-transactions-viewer/static/js/main.31893876.js.map"
   },
   "entrypoints": [
-    "static/css/main.1ef3a49a.css",
-    "static/js/main.c7ce5591.js"
+    "static/css/main.96773e20.css",
+    "static/js/main.31893876.js"
   ]
 }
