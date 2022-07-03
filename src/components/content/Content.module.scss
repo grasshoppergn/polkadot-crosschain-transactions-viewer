@@ -1,5 +1,7 @@
 .container {
-  height: 50vh;
+  height: max-content;
   display: grid;
   place-items: center;
+  gap: 8px;
+  margin: 16px;
 }
