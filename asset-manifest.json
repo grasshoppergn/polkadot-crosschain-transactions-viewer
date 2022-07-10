@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/polkadot-crosschain-transactions-viewer/static/css/main.e1f9b045.css",
-    "main.js": "/polkadot-crosschain-transactions-viewer/static/js/main.9ae8eea5.js",
+    "main.css": "/polkadot-crosschain-transactions-viewer/static/css/main.b0dcb527.css",
+    "main.js": "/polkadot-crosschain-transactions-viewer/static/js/main.48c3a00f.js",
     "static/media/basilisk-logo.png": "/polkadot-crosschain-transactions-viewer/static/media/basilisk-logo.bd771f5ab704587dd6c7.png",
     "static/media/moonriver-logo.svg": "/polkadot-crosschain-transactions-viewer/static/media/moonriver-logo.0d6c0ca22e4f0531f208781460392c87.svg",
     "static/media/spinner.png": "/polkadot-crosschain-transactions-viewer/static/media/spinner.c2f357edb17bac4da6e7.png",
     "static/media/karura-logo.svg": "/polkadot-crosschain-transactions-viewer/static/media/karura-logo.cb78f2cd48d0a846c57211e3fbaca43e.svg",
     "index.html": "/polkadot-crosschain-transactions-viewer/index.html",
-    "main.e1f9b045.css.map": "/polkadot-crosschain-transactions-viewer/static/css/main.e1f9b045.css.map",
-    "main.9ae8eea5.js.map": "/polkadot-crosschain-transactions-viewer/static/js/main.9ae8eea5.js.map"
+    "main.b0dcb527.css.map": "/polkadot-crosschain-transactions-viewer/static/css/main.b0dcb527.css.map",
+    "main.48c3a00f.js.map": "/polkadot-crosschain-transactions-viewer/static/js/main.48c3a00f.js.map"
   },
   "entrypoints": [
-    "static/css/main.e1f9b045.css",
-    "static/js/main.9ae8eea5.js"
+    "static/css/main.b0dcb527.css",
+    "static/js/main.48c3a00f.js"
   ]
 }
