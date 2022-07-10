@@ -2,8 +2,10 @@ $firstRowHeight: 3rem;
 
 .container {
   background: var(--bg-table);
+  width: 100%;
   max-width: 90vw;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: auto;
   transition: max-height 200ms ease-in-out;
   max-height: 500px;
 
