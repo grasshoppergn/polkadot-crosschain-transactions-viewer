@@ -1,3 +1,99 @@
+$firstRowHeight: 3rem;
+
 .container {
-  border: 1px solid saddlebrown;
+  background: var(--bg-table);
+  max-width: 90vw;
+  overflow: hidden;
+  transition: max-height 200ms ease-in-out;
+  max-height: 500px;
+
+  &.collapsed {
+    max-height: $firstRowHeight;
+  }
+}
+
+.directionBoth {
+
+}
+.directionFrom {
+
+}
+.directionTo {
+
+}
+.directionNone {
+
+}
+
+.firstRow {
+  height: $firstRowHeight;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: left;
+  gap: 0.5em;
+  padding: 0.375em 1em;
+}
+
+.timeStamp {
+  flex: 0 0 16ch;
+}
+
+.counterpartDirection {
+  width: 5ch;
+  text-align: right;
+}
+
+.counterpartParachain {
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+}
+
+.counterpartLogo {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.counterpartAddress {
+  flex: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: left;
+  > input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: currentColor;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:focus {
+
+    }
+  }
+}
+
+.copyButton {
+  background: none;
+  cursor: pointer;
+}
+
+.collapseToggle {
+  margin-left: auto;
+  background: none;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+
+  .collapsed & {
+    transform: rotate(180deg);
+  }
+}
+
+.content {
+  max-height: calc(500px - $firstRowHeight);
+  overflow: auto;
+  padding: 2em;
 }

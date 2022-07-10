@@ -15,7 +15,7 @@ export function LatestResults({ className: c }: LatestResultsProps) {
   const [query, loadMore, allNodes] = useLatestResultsQuery();
   return (
     <div className={className}>
-      Latest transactions from {name} chain
+      <h2>Latest transactions from {name} chain</h2>
       {allNodes?.map(item => (
         <Item item={item} key={item.id} />
       ))}

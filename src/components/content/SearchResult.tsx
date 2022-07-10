@@ -13,16 +13,19 @@ interface SearchResultProps {
 export function SearchResult({ className: c, search }: SearchResultProps) {
   const className = classNames(css.container, c);
   const { name } = useChainInfo(true);
-  const result = useSearchQuery(search);
+  const [query, loadMore, allNodes] = useSearchQuery(search);
   return (
     <div className={className}>
-      <h4>
+      <h2>
         Searching "{search}" in {name} chain:
-      </h4>
-      {result.isLoading ? (
+      </h2>
+      {allNodes?.map(item => (
+        <Item item={item} key={item.id} />
+      ))}
+      {query.isLoading || query.isFetchingNextPage ? (
         <Spinner />
       ) : (
-        result.data?.xCMTransfers.nodes.map(item => <Item item={item} key={item.id} />)
+        query.hasNextPage && <button onClick={loadMore}>Load more</button>
       )}
     </div>
   );

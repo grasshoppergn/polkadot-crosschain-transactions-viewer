@@ -20,15 +20,15 @@ export function useChainInfo(throwIfNotFound: boolean): typeof CHAIN_INFO[ChainT
 export const CHAIN_INFO = {
   kusama: {
     id: "kusama",
-    dbId: "1",
+    dbId: [null /*, "0"*/] as Array<string | null>,
     name: "Kusama",
     logo: kusamaLogo,
     style: css.kusamaStyle,
-    apiUrl: undefined,
+    apiUrl: "https://api.subquery.network/sq/serkul/subql-xcm-kusama__c2Vya",
   },
   karura: {
     id: "karura",
-    dbId: "2000",
+    dbId: ["2000"] as Array<string | null>,
     name: "Karura",
     logo: karuraLogo,
     style: css.karuraStyle,
@@ -36,7 +36,7 @@ export const CHAIN_INFO = {
   },
   moonriver: {
     id: "moonriver",
-    dbId: "2023",
+    dbId: ["2023", "2,023"] as Array<string | null>,
     name: "Moonriver",
     logo: moonriverLogo,
     style: css.moonriverStyle,
@@ -44,13 +44,20 @@ export const CHAIN_INFO = {
   },
   basilisk: {
     id: "basilisk",
-    dbId: "4",
+    dbId: ["2090"] as Array<string | null>,
     name: "Basilisk",
     logo: basiliskLogo,
     style: css.basiliskStyle,
-    apiUrl: undefined,
+    apiUrl: "https://api.subquery.network/sq/serkul/subql-xcm-basilisk__c2Vya",
   },
 } as const;
+
+export const CHAIN_BY_DB_ID = Object.values(CHAIN_INFO).reduce((res, item) => {
+  for (const dbId of item.dbId) {
+    res.set(dbId, item);
+  }
+  return res;
+}, new Map<string | null, typeof CHAIN_INFO[keyof typeof CHAIN_INFO]>());
 
 export const DEFAULT_CHAIN: ChainType = "moonriver";
 

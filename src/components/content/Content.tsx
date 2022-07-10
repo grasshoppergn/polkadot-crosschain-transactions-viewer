@@ -3,6 +3,8 @@ import css from "./Content.module.scss";
 import { ChangeEventHandler, useCallback, useState } from "react";
 import { Outlet, useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
+import { faPlay, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { IconButton } from "../common/IconButton";
 
 interface ContentProps {
   className?: string;
@@ -25,9 +27,29 @@ export function Content({ className: c }: ContentProps) {
 
   return (
     <div className={className}>
-      <input type="text" className={css.input} value={value} onChange={onChange} />
-      <span onClick={onResetClick}>X</span>
-      <button onClick={onButtonClick}>Search</button>
+      <div className={css.search}>
+        <div className={css.inputContainer}>
+          <input
+            type="text"
+            className={css.input}
+            value={value}
+            onChange={onChange}
+            placeholder="Account ID to query"
+          />
+          <IconButton
+            icon={faXmark}
+            onClick={onResetClick}
+            className={css.closeButton}
+            aria-label="Clear search"
+          />
+        </div>
+        <IconButton
+          icon={faPlay}
+          onClick={onButtonClick}
+          className={css.searchButton}
+          aria-label="Search"
+        />
+      </div>
       <Outlet />
     </div>
   );

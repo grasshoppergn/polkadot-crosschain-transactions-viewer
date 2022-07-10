@@ -1,5 +1,6 @@
 .container {
   position: relative;
+  z-index: 100;
 }
 
 .groupHeader {
@@ -56,23 +57,28 @@
 }
 
 .link {
-  display: block;
+  &:hover, &:focus {
+    background: var(--bg-menu-hover);
+  }
+  &.linkActive, &.linkActive:hover, &.linkActive:focus {
+    color: var(--color-text);
+    background: var(--bg-tabs);
+  }
+  display: flex;
+  flex-flow: row nowrap;
   padding: 0.5rem 4rem 0.57rem 1.15rem;
   text-decoration: none;
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.5rem;
   color: inherit;
-  width: max-content;
-}
-
-.linkActive {
-
+  min-width: max-content;
+  width: 100%;
 }
 
 .itemLogo {
   display: inline;
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
   margin-right: 0.5rem;
 }

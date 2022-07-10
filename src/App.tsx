@@ -28,12 +28,12 @@ export function App() {
 }
 
 function InChainRoute() {
-  const { style } = useChainInfo(false) || {};
+  const { style, id } = useChainInfo(false) || {};
 
   return style ? (
     <div className={classNames(css.container, style)}>
       <TopMenu />
-      <Content />
+      <Content key={id} />
     </div>
   ) : (
     <Navigate to={`/${DEFAULT_CHAIN}`} />
@@ -42,6 +42,5 @@ function InChainRoute() {
 
 function SearchResultWithSearch() {
   const { search } = useParams<"search">();
-  console.log(search);
   return search ? <SearchResult search={decodeURIComponent(search)} /> : null;
 }
