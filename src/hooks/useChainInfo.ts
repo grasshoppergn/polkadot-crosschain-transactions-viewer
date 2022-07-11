@@ -21,8 +21,8 @@ export const CHAIN_INFO = {
   kusama: {
     id: "kusama",
     dbId: [null, "0", ""] as Array<string | null>,
-    fromSearchFields: ["fromAddress"] as Array<string>,
-    toSearchFields: ["toAddress"] as Array<string>,
+    fromSearchFields: ["fromAddress", "fromAddressSS58"] as Array<string>,
+    toSearchFields: ["toAddress", "toAddressSS58"] as Array<string>,
     fieldsSchema: `
       nodes {
         nodeId
@@ -88,8 +88,8 @@ export const CHAIN_INFO = {
   moonriver: {
     id: "moonriver",
     dbId: ["2023", "2,023"] as Array<string | null>,
-    fromSearchFields: ["fromAddress"] as Array<string>,
-    toSearchFields: ["toAddress"] as Array<string>,
+    fromSearchFields: ["fromAddress", "fromAddressSS58"] as Array<string>,
+    toSearchFields: ["toAddress", "toAddressSS58"] as Array<string>,
     fieldsSchema: `
       nodes {
         nodeId
