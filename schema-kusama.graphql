@@ -367,17 +367,20 @@ type XCMTransfer implements Node {
   blockNumber: BigFloat
   timestamp: String
   fromAddress: String
+  fromAddressSS58: String
   fromParachainId: String
-  toAddress: String
-  toParachainId: String
-  assetParachainId: String
-  assetId: String
-  multiAssetJSON: String
-  amount: String
-  xcmpMessageStatus: String
+  toAddress: String!
+  toAddressSS58: String
+  toParachainId: String!
+  assetId: JSON!
+  amount: JSON!
+  assetIdTransferred: JSON
+  amountTransferred: JSON
   xcmpMessageHash: String
+  xcmpMessageStatus: String
+  xcmpTransferStatus: JSON
   xcmpInstructions: JSON
-  warnings: String
+  warnings: String!
 }
 
 type XCMTransferAggregates {
@@ -400,32 +403,41 @@ input XCMTransferFilter {
   """Filter by the object’s `fromAddress` field."""
   fromAddress: StringFilter
 
+  """Filter by the object’s `fromAddressSS58` field."""
+  fromAddressSS58: StringFilter
+
   """Filter by the object’s `fromParachainId` field."""
   fromParachainId: StringFilter
 
   """Filter by the object’s `toAddress` field."""
   toAddress: StringFilter
 
+  """Filter by the object’s `toAddressSS58` field."""
+  toAddressSS58: StringFilter
+
   """Filter by the object’s `toParachainId` field."""
   toParachainId: StringFilter
 
-  """Filter by the object’s `assetParachainId` field."""
-  assetParachainId: StringFilter
-
   """Filter by the object’s `assetId` field."""
-  assetId: StringFilter
-
-  """Filter by the object’s `multiAssetJSON` field."""
-  multiAssetJSON: StringFilter
+  assetId: JSONFilter
 
   """Filter by the object’s `amount` field."""
-  amount: StringFilter
+  amount: JSONFilter
+
+  """Filter by the object’s `assetIdTransferred` field."""
+  assetIdTransferred: JSONFilter
+
+  """Filter by the object’s `amountTransferred` field."""
+  amountTransferred: JSONFilter
+
+  """Filter by the object’s `xcmpMessageHash` field."""
+  xcmpMessageHash: StringFilter
 
   """Filter by the object’s `xcmpMessageStatus` field."""
   xcmpMessageStatus: StringFilter
 
-  """Filter by the object’s `xcmpMessageHash` field."""
-  xcmpMessageHash: StringFilter
+  """Filter by the object’s `xcmpTransferStatus` field."""
+  xcmpTransferStatus: JSONFilter
 
   """Filter by the object’s `xcmpInstructions` field."""
   xcmpInstructions: JSONFilter
@@ -490,15 +502,18 @@ enum XCMTransfersGroupBy {
   BLOCK_NUMBER
   TIMESTAMP
   FROM_ADDRESS
+  FROM_ADDRESS_S_S58
   FROM_PARACHAIN_ID
   TO_ADDRESS
+  TO_ADDRESS_S_S58
   TO_PARACHAIN_ID
-  ASSET_PARACHAIN_ID
   ASSET_ID
-  MULTI_ASSET_J_S_O_N
   AMOUNT
-  XCMP_MESSAGE_STATUS
+  ASSET_ID_TRANSFERRED
+  AMOUNT_TRANSFERRED
   XCMP_MESSAGE_HASH
+  XCMP_MESSAGE_STATUS
+  XCMP_TRANSFER_STATUS
   XCMP_INSTRUCTIONS
   WARNINGS
 }
@@ -520,24 +535,30 @@ enum XcmTransfersOrderBy {
   TIMESTAMP_DESC
   FROM_ADDRESS_ASC
   FROM_ADDRESS_DESC
+  FROM_ADDRESS_S_S58_ASC
+  FROM_ADDRESS_S_S58_DESC
   FROM_PARACHAIN_ID_ASC
   FROM_PARACHAIN_ID_DESC
   TO_ADDRESS_ASC
   TO_ADDRESS_DESC
+  TO_ADDRESS_S_S58_ASC
+  TO_ADDRESS_S_S58_DESC
   TO_PARACHAIN_ID_ASC
   TO_PARACHAIN_ID_DESC
-  ASSET_PARACHAIN_ID_ASC
-  ASSET_PARACHAIN_ID_DESC
   ASSET_ID_ASC
   ASSET_ID_DESC
-  MULTI_ASSET_J_S_O_N_ASC
-  MULTI_ASSET_J_S_O_N_DESC
   AMOUNT_ASC
   AMOUNT_DESC
-  XCMP_MESSAGE_STATUS_ASC
-  XCMP_MESSAGE_STATUS_DESC
+  ASSET_ID_TRANSFERRED_ASC
+  ASSET_ID_TRANSFERRED_DESC
+  AMOUNT_TRANSFERRED_ASC
+  AMOUNT_TRANSFERRED_DESC
   XCMP_MESSAGE_HASH_ASC
   XCMP_MESSAGE_HASH_DESC
+  XCMP_MESSAGE_STATUS_ASC
+  XCMP_MESSAGE_STATUS_DESC
+  XCMP_TRANSFER_STATUS_ASC
+  XCMP_TRANSFER_STATUS_DESC
   XCMP_INSTRUCTIONS_ASC
   XCMP_INSTRUCTIONS_DESC
   WARNINGS_ASC

@@ -1,63 +1,66 @@
-$firstRowHeight: 3rem;
+$oneRowHeight: 3rem;
+$smallScreenRows: 5;
+$bigScreenRows: 3;
+$verticalPadding: 0.250em;
+$rowsGap: 0.125em;
+$firstRowSmallScreenHeight: calc(($oneRowHeight + $rowsGap) * $smallScreenRows - $rowsGap + $verticalPadding * 2);
+$firstRowHeight: calc(($oneRowHeight + $rowsGap) * $bigScreenRows - $rowsGap + $verticalPadding * 2);
 
 .container {
+  flex: 1 1;
   background: var(--bg-table);
-  width: 100%;
-  max-width: 90vw;
+  width: 90vw;
   overflow-y: hidden;
   overflow-x: auto;
   transition: max-height 200ms ease-in-out;
-  max-height: 500px;
+  max-height: calc(500px + $firstRowSmallScreenHeight);
 
   &.collapsed {
-    max-height: $firstRowHeight;
+    max-height: $firstRowSmallScreenHeight;
   }
 }
 
-.directionBoth {
-
+.br {
+  flex-basis: 100%;
 }
-.directionFrom {
 
-}
-.directionTo {
-
-}
-.directionNone {
-
+.smallBr {
+  flex-basis: 100%;
 }
 
 .firstRow {
-  height: $firstRowHeight;
+  height: $firstRowSmallScreenHeight;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: left;
-  gap: 0.5em;
-  padding: 0.375em 1em;
+  gap: $rowsGap;
+  padding: 0.5em 1em;
 }
 
 .timeStamp {
   flex: 0 0 16ch;
+  margin-right: auto;
 }
 
-.counterpartDirection {
+.toDirection, .fromDirection {
   width: 5ch;
   text-align: right;
+  margin-right: 0.5em;
 }
 
-.counterpartParachain {
+.toParachain, .fromParachain {
   height: 2.5rem;
   display: grid;
   place-items: center;
 }
 
-.counterpartLogo {
+.toLogo, .fromLogo, .counterpartLogo {
   width: 2.5rem;
   height: 2.5rem;
 }
 
-.counterpartAddress {
+.toAddress, .fromAddress {
   flex: 1;
   display: flex;
   flex-flow: row nowrap;
@@ -84,7 +87,6 @@ $firstRowHeight: 3rem;
 }
 
 .collapseToggle {
-  margin-left: auto;
   background: none;
   cursor: pointer;
   transition: all 200ms ease-in-out;
@@ -95,7 +97,22 @@ $firstRowHeight: 3rem;
 }
 
 .content {
-  max-height: calc(500px - $firstRowHeight);
+  max-height: 500px;
   overflow: auto;
   padding: 2em;
+}
+
+@media screen and (min-width: 850px) {
+  .container {
+    max-height: calc(500px + $firstRowSmallScreenHeight);
+    &.collapsed {
+      max-height: $firstRowHeight;
+    }
+  }
+  .firstRow {
+    height: $firstRowHeight;
+  }
+  .smallBr {
+    flex-basis: 0;
+  }
 }

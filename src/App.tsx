@@ -28,9 +28,9 @@ export function App() {
 }
 
 function InChainRoute() {
-  const { style, id } = useChainInfo(false) || {};
+  const { style, id, apiUrl } = useChainInfo(false) || {};
 
-  return style ? (
+  return apiUrl ? (
     <div className={classNames(css.container, style)}>
       <TopMenu />
       <Content key={id} />

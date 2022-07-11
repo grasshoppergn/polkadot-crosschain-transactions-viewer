@@ -1,20 +1,24 @@
 export interface XcmTransfer {
   nodeId: string;
-  id: string | null;
-  blockNumber: string | null;
+  id: string;
+  blockNumber: string;
   timestamp: string | null;
   fromAddress: string | null;
+  fromAddressSS58?: string | null;
   fromParachainId: string | null;
-  toAddress: string | null;
-  toParachainId: string | null;
-  assetParachainId: string | null;
-  assetId: string | null;
-  // multiAssetJSON: string | null;
-  amount: string | null;
-  xcmpMessageStatus: string | null;
-  xcmpMessageHash: string | null;
-  // xcmpInstructions: json;
-  warnings: string | null;
+  toAddress: string;
+  toAddressSS58?: string | null;
+  toParachainId: string;
+  assetParachainId?: string | null;
+  assetId: json;
+  amount: json;
+  assetIdTransferred?: json;
+  amountTransferred?: json;
+  xcmpMessageHash?: string | null;
+  xcmpMessageStatus?: string | null;
+  xcmpTransferStatus?: json;
+  xcmpInstructions?: json;
+  warnings?: string;
 }
 
 export type Direction = "both" | "from" | "to" | "none";

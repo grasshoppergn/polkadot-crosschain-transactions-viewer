@@ -3,18 +3,25 @@ import { gql } from "graphql-request";
 import { usePagedQuery } from "./usePagedQuery";
 
 export function useSearchQuery(search: string, pageSize = 10) {
-  const { dbId } = useChainInfo(true);
+  const { dbId, fromSearchFields, toSearchFields } = useChainInfo(true);
   const [parachainIdCanBeNull, parachainIds] = dbId.reduce(
     ([canBeNull, ids], item) => [canBeNull || item === null, item === null ? ids : [...ids, item]],
     [false, [] as Array<string>],
   );
+  const fromSearchFilters = fromSearchFields.map(field => ({
+    [field]: { includesInsensitive: search },
+  }));
+  const toSearchFilters = toSearchFields.map(field => ({
+    [field]: { includesInsensitive: search },
+  }));
   return usePagedQuery(
     ["search", dbId, search],
-    gql`
+    fields => gql`
       query (
         $pageSize: Int
         $pageParam: Cursor
-        $search: String
+        $fromSearchFilters: [XCMTransferFilter!]
+        $toSearchFilters: [XCMTransferFilter!]
         $parachainIds: [String!]
         $parachainIdCanBeNull: Boolean
       ) {
@@ -22,28 +29,36 @@ export function useSearchQuery(search: string, pageSize = 10) {
           filter: {
             or: [
               {
-                or: [
-                  { fromParachainId: { in: $parachainIds } }
+                and: [
                   {
-                    and: [
-                      { fromParachainId: { isNull: $parachainIdCanBeNull } }
-                      { fromParachainId: { isNull: true } }
+                    or: [
+                      { fromParachainId: { in: $parachainIds } }
+                      {
+                        and: [
+                          { fromParachainId: { isNull: $parachainIdCanBeNull } }
+                          { fromParachainId: { isNull: true } }
+                        ]
+                      }
                     ]
                   }
+                  { or: $fromSearchFilters }
                 ]
-                fromAddress: { includesInsensitive: $search }
               }
               {
-                or: [
-                  { toParachainId: { in: $parachainIds } }
+                and: [
                   {
-                    and: [
-                      { toParachainId: { isNull: $parachainIdCanBeNull } }
-                      { toParachainId: { isNull: true } }
+                    or: [
+                      { toParachainId: { in: $parachainIds } }
+                      {
+                        and: [
+                          { toParachainId: { isNull: $parachainIdCanBeNull } }
+                          { toParachainId: { isNull: true } }
+                        ]
+                      }
                     ]
                   }
+                  { or: $toSearchFilters }
                 ]
-                toAddress: { includesInsensitive: $search }
               }
             ]
           }
@@ -56,25 +71,17 @@ export function useSearchQuery(search: string, pageSize = 10) {
             hasNextPage
           }
           totalCount
-          nodes {
-            nodeId
-            id
-            blockNumber
-            timestamp
-            fromAddress
-            fromParachainId
-            toAddress
-            toParachainId
-            assetParachainId
-            assetId
-            amount
-            xcmpMessageStatus
-            xcmpMessageHash
-            warnings
-          }
+          ${fields}
         }
       }
     `,
-    pageParam => ({ pageParam, pageSize, parachainIds, parachainIdCanBeNull, search }),
+    pageParam => ({
+      pageParam,
+      pageSize,
+      parachainIds,
+      parachainIdCanBeNull,
+      toSearchFilters,
+      fromSearchFilters,
+    }),
   );
 }

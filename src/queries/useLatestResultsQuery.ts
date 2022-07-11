@@ -6,7 +6,7 @@ export function useLatestResultsQuery(pageSize = 10) {
   const { dbId } = useChainInfo(true);
   return usePagedQuery(
     ["latestResults", dbId],
-    gql`
+    fields => gql`
       query ($pageSize: Int, $pageParam: Cursor) {
         xCMTransfers(first: $pageSize, orderBy: BLOCK_NUMBER_DESC, after: $pageParam) {
           pageInfo {
@@ -14,22 +14,7 @@ export function useLatestResultsQuery(pageSize = 10) {
             hasNextPage
           }
           totalCount
-          nodes {
-            nodeId
-            id
-            blockNumber
-            timestamp
-            fromAddress
-            fromParachainId
-            toAddress
-            toParachainId
-            assetParachainId
-            assetId
-            amount
-            xcmpMessageStatus
-            xcmpMessageHash
-            warnings
-          }
+          ${fields}
         }
       }
     `,

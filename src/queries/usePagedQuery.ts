@@ -6,10 +6,10 @@ import { useCallback } from "react";
 
 export function usePagedQuery<TQueryKey extends string | readonly unknown[]>(
   queryId: TQueryKey,
-  gqlQuery: string,
+  gqlQuery: (fields: string) => string,
   queryVariables?: (pageParam: string) => Variables,
 ) {
-  const { apiUrl, dbId } = useChainInfo(true);
+  const { apiUrl, dbId, fieldsSchema } = useChainInfo(true);
   const query = useInfiniteQuery(
     queryId,
     ({ pageParam = "" }) =>
@@ -22,7 +22,7 @@ export function usePagedQuery<TQueryKey extends string | readonly unknown[]>(
           totalCount: number;
           nodes: Array<XcmTransfer>;
         };
-      }>(apiUrl || "", gqlQuery, queryVariables?.(pageParam)),
+      }>(apiUrl || "", gqlQuery(fieldsSchema), queryVariables?.(pageParam)),
     {
       getNextPageParam: ({
         xCMTransfers: {

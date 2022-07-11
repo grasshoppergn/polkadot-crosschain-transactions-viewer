@@ -10,7 +10,7 @@ export function useFindCounterpartsQuery({
   timestamp,
   xcmpMessageHash,
 }: XcmTransfer & { direction: Direction }) {
-  const { apiUrl, dbId } =
+  const { apiUrl, dbId, fieldsSchema } =
     CHAIN_BY_DB_ID.get(direction === "from" ? toParachainId : fromParachainId) ?? {};
   let query: string;
   switch (direction) {
@@ -25,22 +25,7 @@ export function useFindCounterpartsQuery({
             first: 1
             orderBy: BLOCK_NUMBER_ASC
           ) {
-            nodes {
-              nodeId
-              id
-              blockNumber
-              timestamp
-              fromAddress
-              fromParachainId
-              toAddress
-              toParachainId
-              assetParachainId
-              assetId
-              amount
-              xcmpMessageStatus
-              xcmpMessageHash
-              warnings
-            }
+            ${fieldsSchema}
           }
         }
       `;
@@ -56,22 +41,7 @@ export function useFindCounterpartsQuery({
             first: 1
             orderBy: BLOCK_NUMBER_DESC
           ) {
-            nodes {
-              nodeId
-              id
-              blockNumber
-              timestamp
-              fromAddress
-              fromParachainId
-              toAddress
-              toParachainId
-              assetParachainId
-              assetId
-              amount
-              xcmpMessageStatus
-              xcmpMessageHash
-              warnings
-            }
+            ${fieldsSchema}
           }
         }
       `;

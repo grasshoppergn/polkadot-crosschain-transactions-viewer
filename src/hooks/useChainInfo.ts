@@ -20,35 +20,137 @@ export function useChainInfo(throwIfNotFound: boolean): typeof CHAIN_INFO[ChainT
 export const CHAIN_INFO = {
   kusama: {
     id: "kusama",
-    dbId: [null /*, "0"*/] as Array<string | null>,
+    dbId: [null, "0", ""] as Array<string | null>,
+    fromSearchFields: ["fromAddress"] as Array<string>,
+    toSearchFields: ["toAddress"] as Array<string>,
+    fieldsSchema: `
+      nodes {
+        nodeId
+        id
+        blockNumber
+        timestamp
+        fromAddress
+        fromAddressSS58
+        fromParachainId
+        toAddress
+        toAddressSS58
+        toParachainId
+        assetId
+        amount
+        assetIdTransferred
+        amountTransferred
+        xcmpMessageHash
+        xcmpMessageStatus
+        xcmpTransferStatus
+        xcmpInstructions
+        warnings
+      }
+    `,
     name: "Kusama",
     logo: kusamaLogo,
     style: css.kusamaStyle,
-    apiUrl: "https://api.subquery.network/sq/serkul/subql-xcm-kusama__c2Vya",
+    apiUrl: "https://api.subquery.network/sq/serkul/subql-xcm-kusama",
   },
   karura: {
     id: "karura",
     dbId: ["2000"] as Array<string | null>,
+    fromSearchFields: ["fromAddress", "fromAddressSS58"] as Array<string>,
+    toSearchFields: ["toAddress", "toAddressSS58"] as Array<string>,
+    fieldsSchema: `
+      nodes {
+        nodeId
+        id
+        blockNumber
+        timestamp
+        fromAddress
+        fromAddressSS58
+        fromParachainId
+        toAddress
+        toAddressSS58
+        toParachainId
+        assetParachainId
+        assetId
+        amount
+        assetIdTransferred
+        amountTransferred
+        xcmpMessageHash
+        xcmpMessageStatus
+        xcmpTransferStatus
+        xcmpInstructions
+        warnings
+      }
+    `,
     name: "Karura",
     logo: karuraLogo,
     style: css.karuraStyle,
-    apiUrl: "https://api.subquery.network/sq/serkul/subql-xcm-karura__c2Vya",
+    apiUrl: "https://api.subquery.network/sq/serkul/subql-xcm-karura",
   },
   moonriver: {
     id: "moonriver",
     dbId: ["2023", "2,023"] as Array<string | null>,
+    fromSearchFields: ["fromAddress"] as Array<string>,
+    toSearchFields: ["toAddress"] as Array<string>,
+    fieldsSchema: `
+      nodes {
+        nodeId
+        id
+        blockNumber
+        timestamp
+        fromAddress
+        fromAddressSS58
+        fromParachainId
+        toAddress
+        toAddressSS58
+        toParachainId
+        assetParachainId
+        assetId
+        amount
+        assetIdTransferred
+        amountTransferred
+        xcmpMessageHash
+        xcmpMessageStatus
+        xcmpTransferStatus
+        xcmpInstructions
+        warnings
+      }
+    `,
     name: "Moonriver",
     logo: moonriverLogo,
     style: css.moonriverStyle,
-    apiUrl: "https://api.subquery.network/sq/serkul/subql-xcm-moonriver__c2Vya",
+    apiUrl: "https://api.subquery.network/sq/serkul/subql-xcm-moonriver",
   },
   basilisk: {
     id: "basilisk",
     dbId: ["2090"] as Array<string | null>,
+    fromSearchFields: ["fromAddress", "fromAddressSS58"] as Array<string>,
+    toSearchFields: ["toAddress", "toAddressSS58"] as Array<string>,
+    fieldsSchema: `
+      nodes {
+        nodeId
+        id
+        blockNumber
+        timestamp
+        fromAddress
+        fromAddressSS58
+        fromParachainId
+        toAddress
+        toAddressSS58
+        toParachainId
+        assetId
+        amount
+        assetIdTransferred
+        amountTransferred
+        xcmpMessageHash
+        xcmpMessageStatus
+        xcmpTransferStatus
+        xcmpInstructions
+        warnings
+      }
+    `,
     name: "Basilisk",
     logo: basiliskLogo,
     style: css.basiliskStyle,
-    apiUrl: "https://api.subquery.network/sq/serkul/subql-xcm-basilisk__c2Vya",
+    apiUrl: "https://api.subquery.network/sq/serkul/subql-xcm-basilisk",
   },
 } as const;
 
