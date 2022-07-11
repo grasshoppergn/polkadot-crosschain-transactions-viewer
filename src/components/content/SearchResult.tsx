@@ -16,12 +16,14 @@ export function SearchResult({ className: c, search }: SearchResultProps) {
   const [query, loadMore, allNodes] = useSearchQuery(search);
   return (
     <div className={className}>
-      <h2>
+      <h2 className={css.header}>
         Searching "{search}" in {name} chain:
       </h2>
-      {allNodes?.map(item => (
-        <Item item={item} key={item.id} />
-      ))}
+      {allNodes?.length ? (
+        allNodes.map(item => <Item item={item} key={item.id} />)
+      ) : (
+        <h5 className={css.header}>No results found</h5>
+      )}
       {query.isLoading || query.isFetchingNextPage ? (
         <Spinner />
       ) : (

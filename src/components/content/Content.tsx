@@ -5,6 +5,7 @@ import { Outlet, useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 import { faPlay, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { IconButton } from "../common/IconButton";
+import { useChainInfo } from "../../hooks/useChainInfo";
 
 interface ContentProps {
   className?: string;
@@ -12,6 +13,7 @@ interface ContentProps {
 
 export function Content({ className: c }: ContentProps) {
   const className = classNames(css.container, c);
+  const { name } = useChainInfo(true);
   const navigate = useNavigate();
   const [value, setValue] = useState(useParams<"search">()["search"] ?? "");
   const onChange = useCallback<ChangeEventHandler<HTMLInputElement>>(e => {
@@ -34,7 +36,7 @@ export function Content({ className: c }: ContentProps) {
             className={css.input}
             value={value}
             onChange={onChange}
-            placeholder="Account ID to query"
+            placeholder={`Account ID to query on ${name}`}
           />
           <IconButton
             icon={faXmark}
